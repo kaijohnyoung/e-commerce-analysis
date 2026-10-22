@@ -18,9 +18,10 @@ row_counts = {}
 for key, value in datasets.items():
     row_counts[key] = len(value)
 
-append_df_to_markdown('outputs/exploratory_analysis.md', pd.DataFrame(row_counts.items(), columns=['Dataset','Row Count']), title = 'Row Counts by Dataset')
+append_df_to_markdown('outputs/exploratory_data_analysis_results.md', pd.DataFrame(row_counts.items(), columns=['Dataset','Row Count']), title = '1. Row Counts by Dataset')
 
-# Get column null counts for datasets with missing values 
+# Get column null counts for datasets with missing values
+i = 0
 for key, value in datasets.items():
     dataset_column_nulls = {}
 
@@ -35,7 +36,8 @@ for key, value in datasets.items():
 
         null_count_df['Null Counts Expressed as a Percentage'] = (null_count_df['Null Count'] / len(value)) * 100
         
-        append_df_to_markdown('outputs/exploratory_analysis.md', null_count_df, title = f'Columns with Missing Values in {key}')
+        append_df_to_markdown('outputs/exploratory_data_analysis_results.md', null_count_df, title = f'2.{i} Columns with Missing Values in {key}')
+        i+=1
 
 # Create time series of orders by month
 datasets['olist_orders_dataset.csv']['order_purchase_timestamp'] = pd.to_datetime(datasets['olist_orders_dataset.csv']['order_purchase_timestamp'])
@@ -50,28 +52,7 @@ plt.xticks(rotation=45)
 
 plt.savefig('outputs/orders_time_series.png')
 
-append_image_to_markdown('outputs/exploratory_analysis.md', 'orders_time_series.png',title = 'Time Series of Orders')
-
-# Check foreign keys for main datasets
-foreign_keys_to_check = (
-    ['customer_id', 'olist_orders_dataset.csv','olist_customers_dataset.csv'],
-    ['order_id', 'olist_order_items_dataset.csv','olist_orders_dataset.csv'],
-    ['product_id', 'olist_order_items_dataset.csv', 'olist_products_dataset.csv'],
-    ['seller_id', 'olist_order_items_dataset.csv', 'olist_sellers_dataset.csv'],
-    ['order_id', 'olist_order_payments_dataset.csv', 'olist_orders_dataset.csv'],
-    ['order_id', 'olist_order_reviews_dataset.csv', 'olist_orders_dataset.csv']
-)
-
-for check in foreign_keys_to_check:
-
-    home_df = datasets[check[1]]
-    df_to_check = datasets[check[2]]
-
-    missing_keys_df = home_df[
-        ~home_df[check[0]].isin(df_to_check[check[0]])
-    ]
-
-    append_df_to_markdown('outputs/exploratory_analysis.md', missing_keys_df[check[0]], title = f'{check[0]} in {check[1]} Not Present in {check[2]}')
+append_image_to_markdown('outputs/exploratory_data_analysis_results.md', 'orders_time_series.png',title = '3. Time Series of Orders')
 
 # Count duplicate rows for each dataset
 duplicate_checks = {}
@@ -81,7 +62,7 @@ for key, value in datasets.items():
 
 duplicate_checks_df = pd.DataFrame(duplicate_checks.items(), columns=['dataset', 'duplicate_count'])
 
-append_df_to_markdown('outputs/exploratory_analysis.md', duplicate_checks_df, title = 'Count of Duplicate Rows in Each Dataset')
+append_df_to_markdown('outputs/exploratory_data_analysis_results.md', duplicate_checks_df, title = '4. Count of Duplicate Rows in Each Dataset')
 
 # Get distribution of sold item prices
 sold_item_price_data = datasets['olist_order_items_dataset.csv']['price']
@@ -94,7 +75,7 @@ ax.set_xlabel('Sold Item Price')
 
 fig.savefig('outputs/raw_sold_item_prices_histogram.png')
 
-append_image_to_markdown('outputs/exploratory_analysis.md', 'raw_sold_item_prices_histogram.png', title = 'Histogram of Sold Item Prices')
+append_image_to_markdown('outputs/exploratory_data_analysis_results.md', 'raw_sold_item_prices_histogram.png', title = '5. Histogram of Sold Item Prices')
 
 # Get summary of prices
 prices_summary = {
@@ -106,7 +87,7 @@ prices_summary = {
 
 prices_summary_df = pd.DataFrame(prices_summary.items(),columns=['summary','value']).set_index('summary').T
 
-append_df_to_markdown('outputs/exploratory_analysis.md', prices_summary_df, title='Summary of Sold Item Prices')
+append_df_to_markdown('outputs/exploratory_data_analysis_results.md', prices_summary_df, title='6. Summary of Sold Item Prices')
 
 # Get distribution of sold item prices with new bins based on max price and log-transformed y-axis
 from matplotlib.ticker import ScalarFormatter
@@ -121,4 +102,4 @@ ax1.yaxis.set_major_formatter(ScalarFormatter())
 
 fig1.savefig('outputs/adjusted_sold_item_prices_histogram.png')
 
-append_image_to_markdown('outputs/exploratory_analysis.md', 'adjusted_sold_item_prices_histogram.png', title = 'Histogram of Sold Item Prices With Logged Y-Axis')
+append_image_to_markdown('outputs/exploratory_data_analysis_results.md', 'adjusted_sold_item_prices_histogram.png', title = '7. Histogram of Sold Item Prices With Logged Y-Axis')

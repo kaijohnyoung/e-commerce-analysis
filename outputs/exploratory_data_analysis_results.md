@@ -1,4 +1,4 @@
-## Row Counts by Dataset
+## 1. Row Counts by Dataset
 
 | Dataset                               |   Row Count |
 |:--------------------------------------|------------:|
@@ -11,7 +11,7 @@
 | olist_sellers_dataset.csv             |        3095 |
 | product_category_name_translation.csv |          71 |
 
-## Columns with Missing Values in olist_orders_dataset.csv
+## 2.0 Columns with Missing Values in olist_orders_dataset.csv
 
 | Column                        |   Null Count |   Null Counts Expressed as a Percentage |
 |:------------------------------|-------------:|----------------------------------------:|
@@ -19,14 +19,14 @@
 | order_delivered_carrier_date  |         1783 |                                    1.79 |
 | order_delivered_customer_date |         2965 |                                    2.98 |
 
-## Columns with Missing Values in olist_order_reviews_dataset.csv
+## 2.1 Columns with Missing Values in olist_order_reviews_dataset.csv
 
 | Column                 |   Null Count |   Null Counts Expressed as a Percentage |
 |:-----------------------|-------------:|----------------------------------------:|
 | review_comment_title   |        87656 |                                   88.34 |
 | review_comment_message |        58247 |                                   58.70 |
 
-## Columns with Missing Values in olist_products_dataset.csv
+## 2.2 Columns with Missing Values in olist_products_dataset.csv
 
 | Column                     |   Null Count |   Null Counts Expressed as a Percentage |
 |:---------------------------|-------------:|----------------------------------------:|
@@ -39,41 +39,11 @@
 | product_height_cm          |            2 |                                    0.01 |
 | product_width_cm           |            2 |                                    0.01 |
 
-## Time Series of Orders
+## 3. Time Series of Orders
 
-![Time Series of Orders](orders_time_series.png)
+![3. Time Series of Orders](orders_time_series.png)
 
-## customer_id in olist_orders_dataset.csv Not Present in olist_customers_dataset.csv
-
-| customer_id   |
-|---------------|
-
-## order_id in olist_order_items_dataset.csv Not Present in olist_orders_dataset.csv
-
-| order_id   |
-|------------|
-
-## product_id in olist_order_items_dataset.csv Not Present in olist_products_dataset.csv
-
-| product_id   |
-|--------------|
-
-## seller_id in olist_order_items_dataset.csv Not Present in olist_sellers_dataset.csv
-
-| seller_id   |
-|-------------|
-
-## order_id in olist_order_payments_dataset.csv Not Present in olist_orders_dataset.csv
-
-| order_id   |
-|------------|
-
-## order_id in olist_order_reviews_dataset.csv Not Present in olist_orders_dataset.csv
-
-| order_id   |
-|------------|
-
-## Count of Duplicate Rows in Each Dataset
+## 4. Count of Duplicate Rows in Each Dataset
 
 | dataset                               |   duplicate_count |
 |:--------------------------------------|------------------:|
@@ -86,17 +56,17 @@
 | olist_sellers_dataset.csv             |                 0 |
 | product_category_name_translation.csv |                 0 |
 
-## Histogram of Sold Item Prices
+## 5. Histogram of Sold Item Prices
 
-![Histogram of Sold Item Prices](raw_sold_item_prices_histogram.png)
+![5. Histogram of Sold Item Prices](raw_sold_item_prices_histogram.png)
 
-## Summary of Sold Item Prices
+## 6. Summary of Sold Item Prices
 
 |   min |     max |   median |   average |
 |------:|--------:|---------:|----------:|
 |  0.85 | 6735.00 |    74.99 |    120.65 |
 
-## Histogram of Sold Item Prices With Logged Y-Axis
+## 7. Histogram of Sold Item Prices With Logged Y-Axis
 
-![Histogram of Sold Item Prices With Logged Y-Axis](adjusted_sold_item_prices_histogram.png)
+![7. Histogram of Sold Item Prices With Logged Y-Axis](adjusted_sold_item_prices_histogram.png)
 
